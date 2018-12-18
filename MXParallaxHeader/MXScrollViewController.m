@@ -34,13 +34,13 @@
 static void * const kMXScrollViewControllerKVOContext = (void*)&kMXScrollViewControllerKVOContext;
 @synthesize scrollView = _scrollView;
 
-- (void)loadView {
-    self.view = self.scrollView;
-}
+// - (void)loadView {
+//     self.view = self.scrollView;
+// }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.view addSubview:self.scrollView];
     self.scrollView.parallaxHeader.view = self.headerView;
     self.scrollView.parallaxHeader.height = self.headerHeight;
     self.scrollView.parallaxHeader.minimumHeight = self.headerMinimumHeight;
@@ -62,6 +62,7 @@ static void * const kMXScrollViewControllerKVOContext = (void*)&kMXScrollViewCon
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    self.scrollView.frame = self.view.bounds;
     self.scrollView.contentSize = self.scrollView.frame.size;
     [self layoutChildViewController];
 }
